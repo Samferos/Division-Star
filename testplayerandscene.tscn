@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://arene.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/spawnpoint.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1031.5, 482.5 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -14,3 +18,16 @@ speed = 4.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 1.45, 1.177 )
+
+[node name="DeathZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
+position = Vector2( 6.5, 1.5 )
+shape = SubResource( 1 )
+
+[node name="spawnpoint" type="Position2D" parent="."]
+position = Vector2( -95, -145 )
+script = ExtResource( 3 )
+
+[connection signal="body_exited" from="DeathZone" to="spawnpoint" method="_on_DeathZone_body_exited"]
