@@ -38,5 +38,16 @@ func _physics_process(delta):
 		speed *= 2
 		velocity = 60 * jumpForce * 0.25
 	move_and_collide(direction)
+	
 	clamp(velocity, -1000, 1000)
 	print(velocity)
+	
+func _process(delta):
+	if direction == Vector2.ZERO:
+		$Sprite.texture = load("res://sprite/charcters/perso1.png")
+	elif direction.x < 0:
+		$Sprite.texture = load("res://sprite/charcters/perso1cotegauche.png")
+		$Sprite.flip_h = false
+	elif direction.x > 0:
+		$Sprite.texture = load("res://sprite/charcters/perso1cotegauche.png")
+		$Sprite.flip_h = true

@@ -35,8 +35,8 @@ shape = SubResource( 1 )
 [node name="Particles" type="Particles2D" parent="."]
 position = Vector2( 4.25, 0 )
 emitting = false
-amount = 10
-lifetime = 0.5
+amount = 12
+lifetime = 0.2
 one_shot = true
 local_coords = false
 process_material = SubResource( 4 )
