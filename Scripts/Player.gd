@@ -32,8 +32,11 @@ func _physics_process(delta):
 		velocity = 60 * jumpForce
 	elif Input.is_action_just_pressed("Jump") and jumps == 1:
 		jumps -= 1
+		$Particles.restart()
+		$Particles.emitting = true
 		previousSpeed = speed
 		speed *= 2
 		velocity = 60 * jumpForce * 0.25
 	move_and_collide(direction)
+	clamp(velocity, -1000, 1000)
 	print(velocity)
