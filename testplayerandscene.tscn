@@ -23,6 +23,7 @@ zoom = Vector2( 1.45, 1.177 )
 [node name="DeathZone" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
+visible = false
 position = Vector2( 6.5, 1.5 )
 shape = SubResource( 1 )
 
