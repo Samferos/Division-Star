@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var playerID := 0
+export var playerID := 1
 export var speed = 10.0
 export var jumpForce = 5
 export var fallMultiplier = 7
@@ -19,7 +19,7 @@ func _physics_process(delta):
 			jumps = 2
 		onFloor = true
 	move_and_slide(Vector2(0, -yVelocity), Vector2.UP)
-	direction = Vector2(int(Input.is_action_pressed("Right")) - int(Input.is_action_pressed("Left")),0)
+	direction = Vector2(int(Input.is_action_pressed("right_player" + String(playerID))) - int(Input.is_action_pressed("left_player" + String(playerID))),0)
 	direction *= speed * 60 * delta
 	if Input.is_action_just_pressed("Jump") and jumps > 0:
 		onFloor = false
