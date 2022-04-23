@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+export var playerID := 0
 export var speed = 10.0
 export var jumpForce = 5
 export var fallMultiplier = 7

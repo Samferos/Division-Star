@@ -13,7 +13,7 @@ extents = Vector2( 1031.5, 482.5 )
 position = Vector2( 4, 3 )
 
 [node name="player" parent="." instance=ExtResource( 2 )]
-position = Vector2( -93, -147 )
+position = Vector2( -269, -171 )
 speed = 4.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -21,13 +21,14 @@ current = true
 zoom = Vector2( 1.45, 1.177 )
 
 [node name="DeathZone" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
 position = Vector2( 6.5, 1.5 )
 shape = SubResource( 1 )
 
 [node name="spawnpoint" type="Position2D" parent="."]
-position = Vector2( -95, -145 )
+position = Vector2( 8, -205 )
 script = ExtResource( 3 )
 
 [connection signal="body_exited" from="DeathZone" to="spawnpoint" method="_on_DeathZone_body_exited"]
