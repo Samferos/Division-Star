@@ -4,51 +4,38 @@ export var playerID := 0
 export var speed = 10.0
 export var jumpForce = 5
 export var fallMultiplier = 7
-var velocity = 50
+var yVelocity = 0
 var direction = Vector2.ZERO
-var jumps = 2
+var jumps = 1
 var onFloor = false
-var previousSpeed
-
-func _ready():
-	previousSpeed = speed
 
 func _physics_process(delta):
 	if not is_on_floor():
-		if onFloor and jumps == 2:
-			velocity = 0
-			onFloor = false
-		velocity -= fallMultiplier * 60 * delta
+		onFloor = false
+		yVelocity -= fallMultiplier * 60 * delta
 	else:
 		if onFloor:
+			yVelocity = 0
 			jumps = 2
-		speed = previousSpeed
 		onFloor = true
-	move_and_slide(Vector2(0, -velocity), Vector2.UP)
+	move_and_slide(Vector2(0, -yVelocity), Vector2.UP)
 	direction = Vector2(int(Input.is_action_pressed("Right")) - int(Input.is_action_pressed("Left")),0)
 	direction *= speed * 60 * delta
-	if Input.is_action_just_pressed("Jump") and jumps == 2:
+	if Input.is_action_just_pressed("Jump") and jumps > 0:
 		onFloor = false
 		jumps -= 1
-		velocity = 60 * jumpForce
-	elif Input.is_action_just_pressed("Jump") and jumps == 1:
-		jumps -= 1
-		$Particles.restart()
-		$Particles.emitting = true
-		previousSpeed = speed
-		speed *= 2
-		velocity = 60 * jumpForce * 0.25
+		yVelocity = 60 * jumpForce
 	move_and_collide(direction)
 	
-	clamp(velocity, -1000, 1000)
-	print(velocity)
+	clamp(yVelocity, -1000, 1000)
+	print(yVelocity)
 	
 func _process(delta):
 	if direction == Vector2.ZERO:
-		$Sprite.texture = load("res://sprite/charcters/perso1.png")
+		$Sprite.animation = "idle"
 	elif direction.x < 0:
-		$Sprite.texture = load("res://sprite/charcters/perso1cotegauche.png")
+		$Sprite.animation = "side"
 		$Sprite.flip_h = false
 	elif direction.x > 0:
-		$Sprite.texture = load("res://sprite/charcters/perso1cotegauche.png")
+		$Sprite.animation = "side"
 		$Sprite.flip_h = true
